@@ -17,7 +17,7 @@ if st.button("🎭 召喚神意"):
     else:
         with st.spinner("神祇沉思中..."):
             response = client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "你是桌遊中的神祇，負責生成古風劇情與遊戲效果指令"},
                     {"role": "user", "content": f"""
