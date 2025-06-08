@@ -1,9 +1,11 @@
 import streamlit as st
 import openai
-import os
 
-# 使用新版 openai 套件 v1.x 的方式設定金鑰
-openai.api_key = st.secrets["openai_key"]
+# 使用 Streamlit 的 secrets 儲存金鑰
+api_key = st.secrets["openai_key"]
+
+# ✅ 建立 OpenAI Client（關鍵修正點）
+client = openai.OpenAI(api_key=api_key)
 
 st.title("🎴 AI 神祇：事件劇情生成器")
 
@@ -14,8 +16,6 @@ if st.button("🎭 召喚神意"):
         st.warning("請先輸入事件描述！")
     else:
         with st.spinner("神祇沉思中..."):
-            client = openai.OpenAI()  # 新版 API 需要先建立一個 client
-
             response = client.chat.completions.create(
                 model="gpt-4",
                 messages=[
